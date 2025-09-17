@@ -7,6 +7,7 @@ import Toggle from "../Components/Toggle";
 import Dropdown from "../Components/Dropdown";
 import Accodion from "../Components/Accodion";
 import Progressbar from "../Components/Progressbar";
+import LargeList from "../Components/LargeList";
 
 export default function MyPage() {
   const [activeTab, setActiveTab] = useState([tabs[1]?.key]);
@@ -16,7 +17,7 @@ export default function MyPage() {
   const [accOpen, setAccOpen] = useState([0]);
 
   return (
-    <div className="flex justify-centers gap-2 h-screen overflow-hidden w-full">
+    <div className="flex justify-centers gap-2 h-screen w-full">
       <div className="flex items-center">
         <Tab
           tabs={tabs}
@@ -44,6 +45,9 @@ export default function MyPage() {
       </div> */}
       <div className="grid self-center">
         <Progressbar value={20} />
+      </div>
+      <div className="grid">
+        <LargeList />
       </div>
     </div>
   );
