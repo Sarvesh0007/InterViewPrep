@@ -44,11 +44,11 @@ export default function MyPage() {
         <Accodion options={options} onChange={setAccOpen} open={accOpen} />
       </div> */}
       <div className="grid self-center">
-        <Progressbar value={20} />
+        <Progressbar value={90} stepUp="false" />
       </div>
-      <div className="grid">
+      {/* <div className="grid">
         <LargeList />
-      </div>
+      </div> */}
     </div>
   );
 }

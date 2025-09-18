@@ -1,22 +1,19 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-export default function Progressbar({ value }) {
-  const [progress, setProgress] = useState(0);
+export default function Progressbar({ value, stepUp }) {
+  const [progress, setProgress] = useState(value);
 
   useEffect(() => {
-    let start = 0;
-    let step = Math.ceil(value / 20);
-
     const interval = setInterval(() => {
-      start += step;
-      if (start >= value) {
-        setProgress(value);
-        clearInterval(interval);
-      } else {
-        setProgress(start);
-      }
-    }, 50);
+      setProgress((prev) => {
+        if (stepUp === "true") {
+          return prev + 1 >= 100 ? 100 : prev + 1;
+        } else {
+          return prev < 0 ? 0 : prev - 1;
+        }
+      });
+    }, 100);
 
     return () => clearInterval(interval);
   }, [value]);
@@ -24,39 +21,29 @@ export default function Progressbar({ value }) {
   return (
     <div
       style={{
-        border: "1px solid",
-        borderRadius: "9999px",
+        width: "240px",
+        height: "30px",
         overflow: "hidden",
-        width: "200px",
-        height: "24px",
-        background: "gray",
-        position: "relative",
+        background: "#dddd",
+        borderRadius: "40px",
       }}
     >
-      {/* Fill Bar */}
       <div
-        role="progressbar"
         style={{
-          transition: "width 0.4s ease",
-          background: "red",
-          height: "100%",
           width: `${progress}%`,
-        }}
-      />
-
-      {/* Label on top */}
-      <span
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          color: "white",
+          height: "100%",
           fontWeight: "bold",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          fontSize: "1rem",
+          color: "#fff",
+          background: "green",
+          transition: "width 0.5s linear",
         }}
       >
-        {value}%
-      </span>
+        <p>Hello Progress {progress}%</p>
+      </div>
     </div>
   );
 }
